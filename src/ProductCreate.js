@@ -7,12 +7,15 @@ const ProductCreate = () => {
     
     const[id,idchange]=useState("");
     const[name,namechange]=useState("");
-    const[quantity,setQuantity]=useState("");
+    const[quantity,setQuantity]=useState();
     const[mrp,setMrp]=useState("");
     const[brand,setBrand]=useState("");
     const [price,setPrice] =useState("");
     const[stock,setStock]=useState();
     const[validation,valchange]=useState(false);
+    const [errorQuantity,seterrorQuantity]= useState(false);
+    const [errorMrp,seterrorMrp]= useState(false);
+    
     
 
 
@@ -47,7 +50,27 @@ const ProductCreate = () => {
       })
 
     }
+    const handleQuantity = (e)=>{
+        const value  = Number(e.target.value);
+        if(value){
+            setQuantity(e.target.value);
+            seterrorQuantity(false)
+        }else{
+            setQuantity();
+            seterrorQuantity(true);
+        }
 
+    }
+    const handleMrp = (e)=>{
+        const val  = Number(e.target.value);
+        if(val){
+            setMrp(val);
+            seterrorMrp(false)
+        }else{
+            setMrp();
+            seterrorMrp(true);
+        }
+    }
     return (
         <div>
 
@@ -64,8 +87,12 @@ const ProductCreate = () => {
 
                                 <div className="row">
 
-
+                                <div className="divbtn" style={{marginBottom:"10px"}}>
+                        <Link to="/product/create/brand" className="btn btn-success">Add Brand(+)</Link>
+                    </div>
+                   
                                     <div className="col-lg-12" >
+                                        
                                         <div className="form-group">
                                             <label>Name</label>
                                             <input placeholder="Product Name" required value={name} onMouseDown={e=>valchange(true)} onChange={e=>namechange(e.target.value)} className="form-control"></input>
@@ -76,22 +103,36 @@ const ProductCreate = () => {
                                     <div className="col-lg-12" style={{marginTop:"20px"}}>
                                         <div className="form-group">
                                             <label>Quantity (in grams or kgs)</label>
-                                            <input placeholder="example - 250 gram or 1 kg" value={quantity} onChange={e=>setQuantity(e.target.value)} className="form-control"></input>
+                                            <div style={{display:"flex",justifyContent:"space-evenly"}}>
+                                            <input placeholder="example - 250 gram or 1 kg" value={quantity} onChange={e=>handleQuantity(e)} className="form-control"></input>
+                                           
+                                            <select>
+                                                <option>Kg</option>
+                                                <option>grams</option>
+                                            </select>
+                                            </div>
+                                            { errorQuantity && <span className="text-danger">Please Enter a Valid Number!</span>}
                                         </div>
                                     </div>
 
                                     <div className="col-lg-12" style={{marginTop:"20px"}}>
                                         <div className="form-group">
                                             <label>MRP</label>
-                                            <input placeholder="Maximum Retail Price" value={mrp} onChange={e=>setMrp(e.target.value)} className="form-control"></input>
+                                            <input placeholder="Maximum Retail Price" value={mrp} onChange={e=>handleMrp(e)} className="form-control"></input>
+                                            { errorMrp && <span className="text-danger">Please Enter a Valid Number!</span>}
                                         </div>
                                     </div>
 
                                     <div className="col-lg-12" style={{marginTop:"20px"}}>
                                     <div className="form-group">
                                             <label>Brand</label>
-                                            <input placeholder="Brand Name" value={brand} onChange={e=>setBrand(e.target.value)} className="form-control"></input>
-                                        </div>
+                                            <div>                                            
+                                                <select style={{width:"100%" ,border:"1px solid grey"}}>
+                                                    <option>Brands</option>
+                                                    <option>Brands</option>
+                                                </select>
+                                            </div>
+                                    </div>
                                     </div>
                                     <div className="col-lg-12" style={{marginTop:"20px"}}>
                                     <div className="form-group">

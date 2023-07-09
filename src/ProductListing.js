@@ -57,7 +57,10 @@ const ProductListing = () => {
                 </div>
                 <div className="card-body">
                     <div className="divbtn" style={{marginBottom:"10px"}}>
-                        <Link to="/product/create" className="btn btn-success">Add New (+)</Link>
+                        <Link to="/product/create" className="btn btn-success">Add New Product (+)</Link>
+                    </div>
+                    <div className="divbtn" style={{marginBottom:"10px"}}>
+                        <Link to="/customer/create" className="btn btn-success">Add Customer(+)</Link>
                     </div>
                     <table className="table table-bordered">
                         <thead className="bg-dark text-white">
